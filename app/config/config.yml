@@ -46,6 +46,8 @@ doctrine:
         user: '%database_user%'
         password: '%database_password%'
         charset: UTF8
+        types:
+            uuid:  Ramsey\Uuid\Doctrine\UuidType
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'
@@ -69,3 +71,18 @@ swiftmailer:
 sensio_framework_extra:
    router:
         annotations: false
+
+doctrine_migrations:
+    dir_name: '%kernel.project_dir%/src/AppBundle/Domain/DoctrineMigrations'
+    # namespace is arbitrary but should be different from App\Migrations
+    # as migrations classes should NOT be autoloaded
+    namespace: AppBundle\Domain\DoctrineMigrations
+    table_name: 'migration_versions'
+    column_name: 'version'
+    executed_at_column_name: 'executed_at'
+    name: 'Application Migrations'
+    # available in version >= 1.2. Possible values: "BY_YEAR", "BY_YEAR_AND_MONTH", false
+    organize_migrations: false
+    # available in version >= 1.2. Path to your custom migrations template
+    custom_template: ~
+    all_or_nothing: false
